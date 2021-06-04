@@ -5,26 +5,40 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Header from "./Header";
 import Footer from "./Footer";
+import Menubar from "./Menubar";
+import DefaultForm from "./content/DefaultForm"
 
 export default class MainPage extends Component {
   render() {
     return (
       <Container>
         <Row>
-          <Col xs={18} md={12}>
+          <Col xs={12} md={12} lg={12} xl={12}>
             <Header />
           </Col>
         </Row>
         <Row>
-          <Col xs={6} md={4} className="bg-primary" align="left">
-            Left Bar...
-          </Col>
-          <Col xs={12} md={8} className="bg-secondary">
-            Main Content......
+          <Col xs={12} md={12} lg={12} xl={12}>
+            <Menubar />
           </Col>
         </Row>
         <Row>
-          <Col xs={18} md={12}>
+          <Col xs={12} md={12} lg={12} xl={12} className="bg-light">
+            &nbsp;
+          </Col>
+        </Row>
+        <Row>
+          <Col className="bg-light">
+            <div><DefaultForm/></div>
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={12} md={12} lg={12} xl={12} className="bg-light">
+            &nbsp;
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={12} md={12} lg={12} xl={12} className="bg-dark">
             <Footer />
           </Col>
         </Row>

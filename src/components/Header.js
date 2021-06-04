@@ -1,28 +1,21 @@
 import React, { Component } from "react";
-import Navbar from "react-bootstrap/Navbar";
-import Nav from "react-bootstrap/Nav";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import reacticon from '../react.gif'
 
 export default class Header extends Component {
   render() {
     return (
-      <div className="bg-danger" align="left">
-        <Navbar bg="light" variant="light">
-          <Navbar.Brand href="#home">Navbar</Navbar.Brand>
-          <Nav variant="pills" defaultActiveKey="/home">
-            <Nav.Item>
-              <Nav.Link href="/home">Active</Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link eventKey="link-1">Option 2</Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link eventKey="disabled" disabled>
-                Disabled
-              </Nav.Link>
-            </Nav.Item>
-          </Nav>
-        </Navbar>
-      </div>
+      <Container className="bg-dark text-white" fluid>
+        <Row>
+          <Col xs="3" align="left">
+            <img src={reacticon}  width="64" height="64"/>
+          </Col>
+          <Col><h2>Saibal's React Shop</h2></Col>
+        </Row>
+      </Container>
+        
     );
   }
 }

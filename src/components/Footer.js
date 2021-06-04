@@ -1,11 +1,11 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 
 export default class Footer extends Component {
-    render() {
-        return (
-            <div className="bg-light">
-                Footer.....
-            </div>
-        )
-    }
+  render() {
+    return (
+      <blockquote class="blockquote text-center text-white">
+        <footer class="blockquote-footer text-white">Footer.....</footer>
+      </blockquote>
+    );
+  }
 }
