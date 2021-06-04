@@ -8,7 +8,7 @@ export default class DefaultForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      validated: false,
+      validated: false
     };
   }
 
