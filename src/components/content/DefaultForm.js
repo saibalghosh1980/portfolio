@@ -5,9 +5,24 @@ import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 
 export default class DefaultForm extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      validated: false,
+    };
+  }
+
   render() {
+    const handleSubmit = (event) => {
+      const form = event.currentTarget;
+      if (form.checkValidity() === false) {        
+        event.preventDefault();
+        event.stopPropagation();
+      }
+      this.setState({validated:true});
+    };
     return (
-      <Form>
+      <Form noValidate validated={this.state.validated} onSubmit={handleSubmit}>
         <Form.Group controlId="formBasicEmail">
           <Form.Row>
             <Col xs={4} align="right">
@@ -15,7 +30,11 @@ export default class DefaultForm extends Component {
             </Col>
             <Col xs={1}></Col>
             <Col align="left">
-              <Form.Control type="email" placeholder="Enter email" />
+              <Form.Control required type="email" placeholder="Enter email" />
+              <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+              <Form.Control.Feedback type="invalid">
+                Please choose a email.
+              </Form.Control.Feedback>
             </Col>
           </Form.Row>
         </Form.Group>
@@ -27,7 +46,11 @@ export default class DefaultForm extends Component {
             </Col>
             <Col xs={1}></Col>
             <Col align="left">
-              <Form.Control type="password" placeholder="Password" />
+              <Form.Control required type="password" placeholder="Password" />
+              <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+              <Form.Control.Feedback type="invalid">
+                Please choose a password.
+              </Form.Control.Feedback>
             </Col>
           </Form.Row>
         </Form.Group>
