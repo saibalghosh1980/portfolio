@@ -6,7 +6,9 @@ import Col from "react-bootstrap/Col";
 import Header from "./Header";
 import Footer from "./Footer";
 import Menubar from "./Menubar";
-import DefaultForm from "./content/DefaultForm"
+import DefaultForm from "./content/DefaultForm";
+import ProfileForm from "./content/ProfileForm"
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 export default class MainPage extends Component {
   render() {
@@ -18,7 +20,7 @@ export default class MainPage extends Component {
           </Col>
         </Row>
         <Row>
-          <Col xs={12} md={12} lg={12} xl={12}>
+          <Col xs={12} md={12} lg={12} xl={12} className="bg-light">
             <Menubar />
           </Col>
         </Row>
@@ -29,7 +31,14 @@ export default class MainPage extends Component {
         </Row>
         <Row>
           <Col className="bg-light">
-            <div><DefaultForm/></div>
+            <div>
+            <BrowserRouter>
+              <Switch>
+                <Route path="/home" component={DefaultForm} exact />
+                <Route path="/profile" component={ProfileForm} exact />
+              </Switch>
+              </BrowserRouter>
+            </div>
           </Col>
         </Row>
         <Row>
