@@ -3,23 +3,38 @@ import React, { Component } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
+import { withRouter } from 'react-router-dom';
 
-export default class DefaultForm extends Component {
+class DefaultForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      validated: false
+      validated: false,
+      formBasicEmail: "",
+      formBasicPassword: ""
     };
   }
 
+  changeHandler = (event) => {
+    debugger;
+    let id = event.target.id;
+    let val = event.target.value;
+    this.setState({[id]: val});
+
+  };
+
   render() {
     const handleSubmit = (event) => {
+      debugger;
       const form = event.currentTarget;
-      if (form.checkValidity() === false) {        
+      if (form.checkValidity() === false) {
         event.preventDefault();
         event.stopPropagation();
       }
-      this.setState({validated:true});
+      this.setState({ validated: true });
+      console.log(this.state);
+      event.preventDefault();
+      this.props.history.push('/profile');
     };
     return (
       <Form noValidate validated={this.state.validated} onSubmit={handleSubmit}>
@@ -30,7 +45,13 @@ export default class DefaultForm extends Component {
             </Col>
             <Col xs={1}></Col>
             <Col align="left">
-              <Form.Control required type="email" placeholder="Enter email" />
+              <Form.Control
+                required
+                type="email"
+                placeholder="Enter email"
+                onChange={this.changeHandler}
+                value={this.state.formBasicEmail}
+              />
               <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
               <Form.Control.Feedback type="invalid">
                 Please choose a email.
@@ -46,11 +67,12 @@ export default class DefaultForm extends Component {
             </Col>
             <Col xs={1}></Col>
             <Col align="left">
-              <Form.Control required type="password" placeholder="Password" />
+              <Form.Control required type="password" placeholder="Password" value={this.state.formBasicPassword} onChange={this.changeHandler}/>
               <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
               <Form.Control.Feedback type="invalid">
                 Please choose a password.
               </Form.Control.Feedback>
+              {this.state.formBasicEmail}
             </Col>
           </Form.Row>
         </Form.Group>
@@ -71,3 +93,5 @@ export default class DefaultForm extends Component {
     );
   }
 }
+
+export default withRouter(DefaultForm); // <--- make sure to wrap your component with `withRouter()`

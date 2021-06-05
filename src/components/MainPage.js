@@ -36,7 +36,7 @@ export default class MainPage extends Component {
                 <Switch>
                   <Route path="/home" component={DefaultForm} exact />
                   <Route path="/" component={DefaultForm} exact />
-                  <Route path="/profile" component={ProfileForm} exact />
+                  <Route path="/profile" component={ProfileForm}  exact />
                 </Switch>
               </div>
             </Col>
