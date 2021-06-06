@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -10,10 +10,12 @@ import Header from "./Header";
 import Menubar from "./Menubar";
 
 
-export default class MainPage extends Component {
-  render() {
-    return (
-      <Container>
+
+
+
+export default function MainPage() {
+  return (
+    <Container>
         <Row>
           <Col xs={12} md={12} lg={12} xl={12}>
             <Header />
@@ -51,6 +53,5 @@ export default class MainPage extends Component {
           </Col>
         </Row>
       </Container>
-    );
-  }
+  )
 }
