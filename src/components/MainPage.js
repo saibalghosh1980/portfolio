@@ -5,6 +5,7 @@ import Row from "react-bootstrap/Row";
 import { Route, Switch } from "react-router-dom";
 import DefaultForm from "./content/DefaultForm";
 import ProfileForm from "./content/ProfileForm";
+import LoginForm from './content/LoginForm'
 import Footer from "./Footer";
 import Header from "./Header";
 import Menubar from "./Menubar";
@@ -35,7 +36,7 @@ export default function MainPage() {
           <Col className="bg-light">
             <div>
               <Switch>
-                <Route path="/home" component={DefaultForm} exact />
+                <Route path="/home" component={LoginForm} exact />
                 <Route path="/" component={DefaultForm} exact />
                 <Route path="/profile" component={ProfileForm} exact />
               </Switch>
