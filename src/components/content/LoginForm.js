@@ -4,9 +4,10 @@ import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import { useHistory } from "react-router-dom";
 
-export default function LoginForm() {
+export default function LoginForm(props) {
   let history = useHistory();
   const [validated, setValidated] = useState(false);
+  //const [authenticated, setAuthenticated] = useState(false);
   const [loginFormValues, setLoginFormValues] = useState({
     formBasicEmail: "saibal@skg.com",
     formBasicPassword: "",
@@ -32,12 +33,13 @@ export default function LoginForm() {
     } else {
       setValidated(true);
       event.preventDefault();
-      history.push("/profile");
+      props.updateAuthentication(true);
+      //history.push("/profile");
     }
   };
 
   return (
-    <Form noValidate validated={validated} onSubmit={handleSubmit}>
+    <Form noValidate validated={validated} onSubmit={handleSubmit} hidden={props.isAuthenticated}>
       <Form.Group controlId="formBasicEmail">
         <Form.Row>
           <Col xs={4} align="right">

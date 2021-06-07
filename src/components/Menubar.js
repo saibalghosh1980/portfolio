@@ -1,10 +1,11 @@
 import React from "react";
 import Nav from "react-bootstrap/Nav";
 import { LinkContainer } from "react-router-bootstrap";
+import { withRouter } from "react-router";
 
-export default function Menubar() {
+function Menubar(props) {
   return (
-    <Nav variant="tabs" defaultActiveKey="/home">
+    <Nav variant="tabs" defaultActiveKey="/home" activeKey={props.location.pathname}>
       <Nav.Item>
         <LinkContainer to="/home" id="id_Home">
           <Nav.Link>Home</Nav.Link>
@@ -18,3 +19,5 @@ export default function Menubar() {
     </Nav>
   );
 }
+
+export default withRouter(Menubar);
