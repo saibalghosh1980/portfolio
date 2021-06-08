@@ -15,7 +15,8 @@ export default function MainPage() {
   const [authenticated, setAuthenticated] = useState(false);
 
   function updateAuthState(val) {
-    setAuthenticated(true);
+    //alert(val);
+    setAuthenticated(val);
   }
   
 
