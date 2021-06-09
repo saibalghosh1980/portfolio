@@ -5,10 +5,12 @@ import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import { useHistory } from "react-router-dom";
+import Spinner from 'react-bootstrap/Spinner'
 
 export default function LoginForm(props) {
   let history = useHistory();
   const [validated, setValidated] = useState(false);
+  const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   //const [authenticated, setAuthenticated] = useState(false);
   const [loginFormValues, setLoginFormValues] = useState({
@@ -36,6 +38,7 @@ export default function LoginForm(props) {
     } else {
       setValidated(true);
       event.preventDefault();
+      setLoading(true);
       axios
         .post("http://localhost:8080/login", loginFormValues)
         .then((response) => {
@@ -44,9 +47,9 @@ export default function LoginForm(props) {
         })
         .catch((error) => {
           console.log(error);
-          setError(error.response.data.loginStatus);
+          setError(error.response.data==null?error.message:error.response.data.loginStatus);
           props.updateAuthentication(false);
-        });
+        }).finally(()=>setLoading(false));
 
       //history.push("/profile");
     }
@@ -55,6 +58,7 @@ export default function LoginForm(props) {
   return (
     <div>
       {error == null ? <b /> : <Alert variant="danger">{error}</Alert>}
+      <Spinner animation="border" hidden={!isLoading}/>
       <Form
         noValidate
         validated={validated}
