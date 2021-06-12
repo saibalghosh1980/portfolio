@@ -47,7 +47,7 @@ export default function LoginForm(props) {
         })
         .catch((error) => {
           console.log(error);
-          setError(error.response.data==null?error.message:error.response.data.loginStatus);
+          setError(error.response==null?error.message:error.response.data.loginStatus);
           props.updateAuthentication(false);
         }).finally(()=>setLoading(false));
 

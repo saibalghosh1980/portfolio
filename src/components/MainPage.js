@@ -10,6 +10,7 @@ import Footer from "./Footer";
 import Header from "./Header";
 import Menubar from "./Menubar";
 import { useState } from "react";
+import ProtectedRoute from "./security/ProtectedRoute";
 
 export default function MainPage() {
   const [authenticated, setAuthenticated] = useState(false);
@@ -17,6 +18,11 @@ export default function MainPage() {
   function updateAuthState(val) {
     //alert(val);
     setAuthenticated(val);
+  }
+
+  function guardFunction(){
+    alert("Autheticated :: "+authenticated)
+    return authenticated;
   }
   
 
@@ -48,9 +54,8 @@ export default function MainPage() {
                 />
               </Route>
               <Route path="/" component={DefaultForm} exact />
-              <Route path="/profile">
-                <ProfileForm />
-              </Route>
+              <ProtectedRoute path="/profile" component={ProfileForm} authenticated={authenticated} exact>                
+              </ProtectedRoute>
             </Switch>
           </div>
         </Col>
