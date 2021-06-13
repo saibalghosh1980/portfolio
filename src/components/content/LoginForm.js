@@ -12,6 +12,7 @@ export default function LoginForm(props) {
   const [validated, setValidated] = useState(false);
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [message, setPageMessage] = useState(null);
   //const [authenticated, setAuthenticated] = useState(false);
   const [loginFormValues, setLoginFormValues] = useState({
     formBasicEmail: "saibal@skg.com",
@@ -43,6 +44,7 @@ export default function LoginForm(props) {
         .post("http://localhost:8080/login", loginFormValues)
         .then((response) => {
           console.log(response);
+          setPageMessage(response.data.loginStatus);
           props.updateAuthentication(true);
         })
         .catch((error) => {
@@ -58,6 +60,7 @@ export default function LoginForm(props) {
   return (
     <div>
       {error == null ? <b /> : <Alert variant="danger">{error}</Alert>}
+      {message == null ? <b /> : <Alert variant="primary">{message}</Alert>}
       <Spinner animation="border" hidden={!isLoading}/>
       <Form
         noValidate
