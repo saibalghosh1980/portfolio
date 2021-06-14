@@ -2,14 +2,12 @@ import React, { useEffect, useState } from "react";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
-import { Route, Switch } from "react-router-dom";
-import DefaultForm from "./content/DefaultForm";
+import { Redirect, Route, Switch } from "react-router-dom";
 import LoginForm from "./content/LoginForm";
 import ProfileForm from "./content/ProfileForm";
 import Footer from "./Footer";
 import Header from "./Header";
 import Menubar from "./Menubar";
-import ProtectedRoute from "./security/ProtectedRoute";
 
 export default function MainPage() {
   const [authenticated, setAuthenticated] = useState(() => {
@@ -21,6 +19,8 @@ export default function MainPage() {
   });
   //This effect will be called when the authenticated state will change
   useEffect(() => {
+    //If it's successfully authenticated then the state will be stored in storage or else
+    //the entry from session storage will be removed
     authenticated
       ? sessionStorage.setItem("authenticated", authenticated)
       : sessionStorage.clear();
@@ -40,7 +40,10 @@ export default function MainPage() {
     <Container>
       <Row>
         <Col xs={12} md={12} lg={12} xl={12}>
-          <Header />
+          <Header
+            isAuthenticated={authenticated}
+            updateAuthentication={updateAuthState}
+          />
         </Col>
       </Row>
       <Row>
@@ -57,19 +60,18 @@ export default function MainPage() {
         <Col className="bg-light">
           <div>
             <Switch>
-              <Route path="/home">
+              <Route path="/" exact>
+                <Redirect to="/home"/>
+              </Route>
+              <Route path="/home" exact>
                 <LoginForm
                   isAuthenticated={authenticated}
                   updateAuthentication={updateAuthState}
                 />
               </Route>
-              <Route path="/" component={DefaultForm} exact />
-              <ProtectedRoute
-                path="/profile"
-                component={ProfileForm}
-                authenticated={authenticated}
-                exact
-              ></ProtectedRoute>
+              <Route path="/profile" component={ProfileForm} exact>
+                {authenticated ? <ProfileForm /> : <Redirect to="/home" />}
+              </Route>
             </Switch>
           </div>
         </Col>

@@ -51,8 +51,8 @@ if( requestBody.contains("some data") )&#13;
     return "Response N"&#13;
 }&#13;
 */&#13;
-</con:dispatchPath><con:response name="ResponseSuccess" id="9f6e32ee-9d6c-4e75-ba4b-e112eb81f9fc" httpResponseStatus="401" mediaType="application/json"><con:settings/><con:responseContent>{
-	"loginStatus":"Login failed!!!!!"
+</con:dispatchPath><con:response name="ResponseSuccess" id="9f6e32ee-9d6c-4e75-ba4b-e112eb81f9fc" httpResponseStatus="200" mediaType="application/json"><con:settings/><con:responseContent>{
+	"loginStatus":"Login success!!!!!"
 }
 </con:responseContent><con:header><con:name>Access-Control-Allow-Origin</con:name><con:value>*</con:value></con:header><con:header><con:name>Access-Control-Allow-Headers</con:name><con:value>*</con:value></con:header></con:response></con:restMockAction><con:restMockAction name="/" method="OPTIONS" resourcePath="/" id="7153d17d-e591-48fd-b017-da1bbf261b96"><con:settings/><con:defaultResponse>Response 1</con:defaultResponse><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:dispatchPath>/*&#13;
 // Script dispatcher is used to select a response based on the incoming request.&#13;
