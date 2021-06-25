@@ -13,7 +13,7 @@ export default function Header(props) {
   const history=useHistory()
   const logOutHandler=()=>{
       props.updateAuthentication(false);
-      history.push("/home")
+      history.push("/profile")
   }
 
   return (

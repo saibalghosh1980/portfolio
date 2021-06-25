@@ -5,7 +5,7 @@ import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import { useHistory } from "react-router-dom";
-import Spinner from 'react-bootstrap/Spinner'
+import Spinner from "react-bootstrap/Spinner";
 
 export default function LoginForm(props) {
   let history = useHistory();
@@ -49,9 +49,14 @@ export default function LoginForm(props) {
         })
         .catch((error) => {
           console.log(error);
-          setError(error.response==null?error.message:error.response.data.loginStatus);
+          setError(
+            error.response == null
+              ? error.message
+              : error.response.data.loginStatus
+          );
           props.updateAuthentication(false);
-        }).finally(()=>setLoading(false));
+        })
+        .finally(() => setLoading(false));
 
       //history.push("/profile");
     }
@@ -61,7 +66,7 @@ export default function LoginForm(props) {
     <div>
       {error == null ? <b /> : <Alert variant="danger">{error}</Alert>}
       {message == null ? <b /> : <Alert variant="primary">{message}</Alert>}
-      <Spinner animation="border" hidden={!isLoading}/>
+      <Spinner animation="border" hidden={!isLoading} />
       <Form
         noValidate
         validated={validated}

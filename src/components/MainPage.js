@@ -28,7 +28,7 @@ export default function MainPage() {
 
   function updateAuthState(val) {
     //alert(val);
-    setAuthenticated(val);
+    setAuthenticated(val); 
   }
 
   function guardFunction() {
