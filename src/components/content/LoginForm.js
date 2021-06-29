@@ -6,8 +6,13 @@ import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import { useHistory } from "react-router-dom";
 import Spinner from "react-bootstrap/Spinner";
+import { logInAction } from "../../redux/action/logInOutAction";
+import { useDispatch } from "react-redux";
 
 export default function LoginForm(props) {
+  //----------------------REDUX---------------------------------
+  const dispatch = useDispatch();
+  //============================================================
   let history = useHistory();
   const [validated, setValidated] = useState(false);
   const [isLoading, setLoading] = useState(false);
@@ -20,7 +25,7 @@ export default function LoginForm(props) {
   });
 
   const changeHandler = (event) => {
-    debugger;
+    //debugger;
     let id = event.target.id;
     let val = event.target.value;
     setLoginFormValues((prevState) => {
@@ -29,7 +34,7 @@ export default function LoginForm(props) {
   };
 
   const handleSubmit = (event) => {
-    debugger;
+    //debugger;
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
@@ -46,6 +51,7 @@ export default function LoginForm(props) {
           console.log(response);
           setPageMessage(response.data.loginStatus);
           props.updateAuthentication(true);
+          dispatch(logInAction({ loggedIn: true }));
         })
         .catch((error) => {
           console.log(error);

@@ -8,8 +8,16 @@ import ProfileForm from "./content/ProfileForm";
 import Footer from "./Footer";
 import Header from "./Header";
 import Menubar from "./Menubar";
+import { useSelector } from "react-redux";
 
 export default function MainPage() {
+
+  //----Use redux logged-in state-------------------------------------------------
+
+  const redux_state_is_logged_in=useSelector(state=>state.loginReducer)
+  console.log(redux_state_is_logged_in)
+  //------------------------------------------------------------------------------
+
   const [authenticated, setAuthenticated] = useState(() => {
     console.log(
       'sessionStorage.getItem("authenticated")' +

@@ -6,12 +6,18 @@ import Button from "react-bootstrap/Button";
 import reacticon from '../react.gif'
 import { BiPowerOff } from "@react-icons/all-files/bi/BiPowerOff";
 import { useHistory } from "react-router-dom";
+import { logOutAction } from "../redux/action/logInOutAction";
+import { useDispatch } from "react-redux";
 
 
 
 export default function Header(props) {
+  //----------------------REDUX---------------------------------
+  const dispatch = useDispatch();
+  //============================================================
   const history=useHistory()
   const logOutHandler=()=>{
+      dispatch(logOutAction({ loggedIn: false }));
       props.updateAuthentication(false);
       history.push("/profile")
   }
