@@ -1,24 +1,24 @@
-import React, { Component } from "react";
+import { BiPowerOff } from "@react-icons/all-files/bi/BiPowerOff";
+import React from "react";
+import Button from "react-bootstrap/Button";
+import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Button from "react-bootstrap/Button";
-import reacticon from '../react.gif'
-import { BiPowerOff } from "@react-icons/all-files/bi/BiPowerOff";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import reacticon from '../react.gif';
 import { logOutAction } from "../redux/action/logInOutAction";
-import { useDispatch } from "react-redux";
 
 
 
 export default function Header(props) {
   //----------------------REDUX---------------------------------
+  const redux_state_is_logged_in = useSelector((state) => state.loginReducer);
   const dispatch = useDispatch();
   //============================================================
   const history=useHistory()
   const logOutHandler=()=>{
       dispatch(logOutAction({ loggedIn: false }));
-      props.updateAuthentication(false);
       history.push("/profile")
   }
 
@@ -29,7 +29,7 @@ export default function Header(props) {
             <img src={reacticon}  width="64" height="64"/>
           </Col>
           <Col><h2>Saibal's React Shop</h2></Col>
-          <Col align="right">{!props.isAuthenticated?<b/>:<Button variant="dark" onClick={logOutHandler}><BiPowerOff/>&nbsp;&nbsp;Logout</Button>}</Col>
+          <Col align="right">{!redux_state_is_logged_in.loggedIn?<b/>:<Button variant="dark" onClick={logOutHandler}><BiPowerOff/>&nbsp;&nbsp;Logout</Button>}</Col>
         </Row>
       </Container>
   )

@@ -4,13 +4,15 @@ import Alert from "react-bootstrap/Alert";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
-import { useHistory } from "react-router-dom";
 import Spinner from "react-bootstrap/Spinner";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { logInAction } from "../../redux/action/logInOutAction";
-import { useDispatch } from "react-redux";
 
 export default function LoginForm(props) {
+
   //----------------------REDUX---------------------------------
+  const redux_state_is_logged_in = useSelector((state) => state.loginReducer);
   const dispatch = useDispatch();
   //============================================================
   let history = useHistory();
@@ -50,7 +52,7 @@ export default function LoginForm(props) {
         .then((response) => {
           console.log(response);
           setPageMessage(response.data.loginStatus);
-          props.updateAuthentication(true);
+          //props.updateAuthentication(true);
           dispatch(logInAction({ loggedIn: true }));
         })
         .catch((error) => {
@@ -60,7 +62,7 @@ export default function LoginForm(props) {
               ? error.message
               : error.response.data.loginStatus
           );
-          props.updateAuthentication(false);
+          //props.updateAuthentication(false);
         })
         .finally(() => setLoading(false));
 
@@ -77,7 +79,7 @@ export default function LoginForm(props) {
         noValidate
         validated={validated}
         onSubmit={handleSubmit}
-        hidden={props.isAuthenticated}
+        hidden={redux_state_is_logged_in.loggedIn}
       >
         <Form.Group controlId="formBasicEmail">
           <Form.Row>
