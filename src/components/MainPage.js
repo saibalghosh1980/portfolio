@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import { Redirect, Route, Switch } from "react-router-dom";
 import LoginForm from "./content/LoginForm";
 import ProfileForm from "./content/ProfileForm";
-import CovidPage from "./content/CovidPage";
+import CovidPage from "./content/covid/CovidPage";
 import Footer from "./Footer";
 import Header from "./Header";
 import Menubar from "./Menubar";
