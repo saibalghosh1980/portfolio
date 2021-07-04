@@ -1,22 +1,41 @@
+import "bootstrap/dist/css/bootstrap.min.css";
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
-import "bootstrap/dist/css/bootstrap.min.css";
-import App from "./App";
-import reportWebVitals from "./reportWebVitals";
-import { createStore } from "redux";
-import allReducer from "./redux/reducer/allReducer";
 import { Provider } from "react-redux";
+import { applyMiddleware, compose, createStore } from "redux";
+import { persistReducer, persistStore } from "redux-persist";
+import { PersistGate } from 'redux-persist/integration/react';
+import storage from "redux-persist/lib/storage";
+import storageSession from 'redux-persist/lib/storage/session';
+import App from "./App";
+import "./index.css";
+import allReducer from "./redux/reducer/allReducer";
+import reportWebVitals from "./reportWebVitals";
+
+const persistConfig = {
+  // configuration object for redux-persist
+  key: "root",
+  storage: storage // define which storage to use
+};
+
+const persistedReducer = persistReducer(persistConfig, allReducer);
+
+const composeEnhancer =  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
 const store = createStore(
-  allReducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  persistedReducer,
+  composeEnhancer(applyMiddleware())
 );
+
+const persistor = persistStore(store);
 
 ReactDOM.render(
   <Provider store={store}>
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
+    <PersistGate loading={null} persistor={persistor}>
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
+    </PersistGate>
   </Provider>,
   document.getElementById("root")
 );

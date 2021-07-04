@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import { Redirect, Route, Switch } from "react-router-dom";
 import LoginForm from "./content/LoginForm";
 import ProfileForm from "./content/ProfileForm";
+import CovidPage from "./content/CovidPage";
 import Footer from "./Footer";
 import Header from "./Header";
 import Menubar from "./Menubar";
@@ -48,7 +49,14 @@ export default function MainPage() {
               <Route path="/home" exact>
                 <LoginForm/>
               </Route>
-              <Route path="/profile" component={ProfileForm} exact>
+              <Route path="/covid" component={CovidPage} exact>
+                {redux_state_is_logged_in.loggedIn ? (
+                  <CovidPage />
+                ) : (
+                  <Redirect to="/home" />
+                )}
+              </Route>
+              <Route path="/profile" component={CovidPage} exact>
                 {redux_state_is_logged_in.loggedIn ? (
                   <ProfileForm />
                 ) : (

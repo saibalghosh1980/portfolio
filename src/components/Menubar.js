@@ -16,6 +16,11 @@ function Menubar(props) {
           <Nav.Link>Profile</Nav.Link>
         </LinkContainer>
       </Nav.Item>
+      <Nav.Item>
+        <LinkContainer to="/covid">
+          <Nav.Link>Covid</Nav.Link>
+        </LinkContainer>
+      </Nav.Item>
     </Nav>
   );
 }
