@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -10,12 +10,14 @@ import CovidPage from "./content/covid/CovidPage";
 import Footer from "./Footer";
 import Header from "./Header";
 import Menubar from "./Menubar";
+import Alert from "react-bootstrap/Alert";
 
 export default function MainPage() {
   //----Use redux logged-in state-------------------------------------------------
   const redux_state_is_logged_in = useSelector((state) => state.loginReducer);
   console.log(redux_state_is_logged_in);
   //------------------------------------------------------------------------------
+  const [alertTimeOut, setAlertTimeOut] = useState(false)
 
   function guardFunction() {
     //alert("Autheticated :: " + authenticated);
@@ -26,12 +28,17 @@ export default function MainPage() {
     <Container>
       <Row>
         <Col xs={12} md={12} lg={12} xl={12}>
-          <Header />
+          <Header onChangeTimeoutState={setAlertTimeOut}/>
         </Col>
       </Row>
       <Row>
         <Col xs={12} md={12} lg={12} xl={12} className="bg-light">
           <Menubar />
+        </Col>
+      </Row>
+      <Row hidden={!alertTimeOut}>
+        <Col xs={12} md={12} lg={12} xl={12} className="bg-light">
+        <Alert variant="danger">{`Logged out...Session timed out...`}</Alert>
         </Col>
       </Row>
       <Row>
@@ -47,7 +54,7 @@ export default function MainPage() {
                 <Redirect to="/home" />
               </Route>
               <Route path="/home" exact>
-                <LoginForm/>
+                <LoginForm onChangeTimeoutState={setAlertTimeOut}/>
               </Route>
               <Route path="/covid" component={CovidPage} exact>
                 {redux_state_is_logged_in.loggedIn ? (

@@ -54,6 +54,7 @@ export default function LoginForm(props) {
           setPageMessage(response.data.loginStatus);
           //props.updateAuthentication(true);
           dispatch(logInAction({ loggedIn: true }));
+          props.onChangeTimeoutState(false);
         })
         .catch((error) => {
           console.log(error);

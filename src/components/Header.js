@@ -13,9 +13,11 @@ import {useIdleTimer} from "react-idle-timer";
 export default function Header(props) {
   //----------------------Timeout-------------------------------
   const handleOnIdle = event => {
+
     console.log('user is idle', event)
     console.log('last active', getLastActiveTime())
     dispatch(logOutAction({ loggedIn: false }));
+    props.onChangeTimeoutState(true);
     history.push("/profile");
   }
 
@@ -25,11 +27,11 @@ export default function Header(props) {
   }
 
   const handleOnAction = event => {
-    console.log('user did something', event)
+    //console.log('user did something', event)
   }
 
   const { getRemainingTime, getLastActiveTime } = useIdleTimer({
-    timeout: 1000 * 60 * .5,
+    timeout: 1000 * 60 * 1,
     onIdle: handleOnIdle,
     onActive: handleOnActive,
     onAction: handleOnAction,

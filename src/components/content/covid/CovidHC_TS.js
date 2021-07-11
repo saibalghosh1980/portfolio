@@ -1,13 +1,12 @@
-import React from "react";
-import axios from "axios";
-import Alert from "react-bootstrap/Alert";
-import Spinner from "react-bootstrap/Spinner";
-import { useQuery } from "react-query";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
+import React, { useState } from "react";
+import Dropdown from 'react-bootstrap/Dropdown'
+import DropdownButton from "react-bootstrap/DropdownButton";
 
 export default function CovidHC_TS(props) {
-  
+  //const [daysToShow, setDaysToShow] = useState(90);
+
   //------------------------HighChart Options--------------------------------------------------
   const highchart_options = {
     title: {
@@ -81,8 +80,21 @@ export default function CovidHC_TS(props) {
     },
   };
   //-------------------------------------------------------------------------------------------
+  const noOfDaysChangeHandler=(event)=>{
+    console.log(event.target.innerHTML);
+    props.onChangeDaysToShow(parseInt(event.target.innerHTML));
+  }
   return (
     <div>
+      <DropdownButton id="dropdown-basic-button" title={`No of days...[`+props.days+`]`} subtitle={props.days}>
+        <Dropdown.Item  onClick={noOfDaysChangeHandler}>90</Dropdown.Item>
+        <Dropdown.Item  onClick={noOfDaysChangeHandler}>60</Dropdown.Item>
+        <Dropdown.Item  onClick={noOfDaysChangeHandler}>30</Dropdown.Item>
+        <Dropdown.Item  onClick={noOfDaysChangeHandler}>15</Dropdown.Item>
+        <Dropdown.Item  onClick={noOfDaysChangeHandler}>10</Dropdown.Item>
+        <Dropdown.Item  onClick={noOfDaysChangeHandler}>5</Dropdown.Item>
+      </DropdownButton>
+      <br/>
       <HighchartsReact highcharts={Highcharts} options={highchart_options} />
     </div>
   );

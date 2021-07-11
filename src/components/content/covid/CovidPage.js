@@ -14,6 +14,7 @@ export default function CovidPage() {
   
  
   const [tabshow, setTabToShow] = useState("TS");
+  const [daysToShow, setDaysToShow] = useState(90);
   const chooseTab = (event) => {
     setTabToShow(event.target.value);
   };
@@ -41,7 +42,7 @@ export default function CovidPage() {
     //console.log(new Date());
     var Difference_In_Days = (new Date() - dateToCompare) / (1000 * 3600 * 24);
     //console.log(Difference_In_Days);
-    return Difference_In_Days < 90;
+    return Difference_In_Days < daysToShow;
   });
 
   /*const datatest=dataToShow.map((item) => {
@@ -70,7 +71,7 @@ export default function CovidPage() {
       
         <ReactQueryDevtools initialIsOpen={false} />
         {tabshow === "TS" ? (
-          <CovidHC_TS hcData={dataToShow}/>
+          <CovidHC_TS hcData={dataToShow} onChangeDaysToShow={setDaysToShow} days={daysToShow}/>
         ) : tabshow === "SW" ? (
           <CovidHC_SW hcData={dataStateWise}/>
         ) : (
